@@ -39,6 +39,7 @@ const errors = ref({
   resident: null,
   reason: null,
   gender: null,
+  confirmPassword: null,
   reason: null
 })
 
@@ -70,6 +71,13 @@ const validatePassword = (blur) => {
     if (blur) errors.value.password = 'Password must contain at least one special character.'
   } else {
     errors.value.password = null
+  }
+}
+const validateConfirmPassword = (blur) => {
+  if (formData.value.password !== formData.value.confirmPassword) {
+    if (blur) errors.value.confirmPassword = 'Passwords do not match.'
+  } else {
+    errors.value.confirmPassword = null
   }
 }
 </script>
@@ -126,8 +134,11 @@ const validatePassword = (blur) => {
             class="form-control"
             id="confirm-password"
             v-model="formData.confirmPassword"
+            @blur="() => validateConfirmPassword(true)"
           />
-          <div v-if="errors.password" class="text-danger">{{ errors.password }}</div>
+          <div v-if="errors.confirmPassword" class="text-danger">
+                {{ errors.confirmPassword }}
+              </div>
           </div>
           </div>
           <div class="row mb-3">
