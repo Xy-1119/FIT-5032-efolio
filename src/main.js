@@ -1,19 +1,18 @@
-// import './assets/main.css'
-// import '@/assets/style.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
-
+// src/main.js
 import { createApp } from 'vue'
 import App from './App.vue'
 
+import 'bootstrap/dist/css/bootstrap.min.css'
+
+import router from './router'
+
 import PrimeVue from 'primevue/config'
-import Aura from '@primeuix/themes/aura'
-// import DataTable from 'primevue/datatable'
-// import Column from 'primevue/Column'
+import Aura from '@primevue/themes/aura'
+
+
+import './Firebase/init'        // 或：import { app as firebaseApp } from './firebase/init'
 
 const app = createApp(App)
 app.use(PrimeVue, { theme: { preset: Aura } })
-
-// app.component('DataTable', DataTable)
-// app.component('Column', Column)
-
+app.use(router)
 app.mount('#app')
