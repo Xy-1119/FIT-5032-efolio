@@ -3,12 +3,18 @@ import AboutView from '../views/AboutView.vue'
 import AddBookView from '../views/AddBookview.vue'
 import FirebaseSigninView from '@/views/FirebaseSigninView.vue'
 import FirebaseRegisterView from '@/views/FirebaseRegisterView.vue' 
+import GetBookCountView from '@/views/GetBookCountView.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Signin',
     component: FirebaseSigninView   
+  },
+   {
+    path: '/GetBookCount',
+    name: 'GetBookCount',
+    component:GetBookCountView   
   },
   {
     path: '/about',
