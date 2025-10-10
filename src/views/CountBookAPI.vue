@@ -1,9 +1,7 @@
 <template>
   <div id="app">
-    <h1>Book Counter</h1>
-    <button @click="getBookCount">Get Book Count</button>
-    <p v-if="count !== null">Total number of books: {{ count }}</p>
-    <p v-if="error">{{ error }}</p>
+    <pre>{{ jsondata }}</pre>
+    <p v-if="error" style="color:red">Error: {{ error }}</p>
   </div>
 </template>
 
@@ -13,22 +11,25 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      count: null,
+      jsondata: null, 
       error: null,
     };
   },
+  mounted() {
+    this.getBookCountAPI();
+  },
   methods: {
-    async getBookCount() {
+    async getBookCountAPI() {
       try {
         const response = await axios.get(
           'https://us-central1-week7-yangxu.cloudfunctions.net/countBooks'
         );
-        this.count = response.data.count;
+        this.jsondata = response.data; 
         this.error = null;
       } catch (error) {
         console.error('Error fetching book count:', error);
-        this.error = error;
-        this.count = null;
+        this.error = error.message; 
+        this.jsondata = null;
       }
     },
   },

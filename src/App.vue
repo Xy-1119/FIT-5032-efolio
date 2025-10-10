@@ -5,16 +5,30 @@ import LibraryRegistrationForm from './views/HomeView.vue'
 </script>
 
 <template>
-  <header>
-    <BHeader />
-  </header>
-
-  <main class="main-box">
-    <!-- <JSONLab /> -->
-     <RouterView></RouterView>
-  </main>
+  <div class="main-container">
+    <header v-if="showHeader">
+      <BHeader />
+    </header>
+    <main class="main-box">
+      <router-view></router-view>
+    </main>
+  </div>
 </template>
 
-<style scoped>
+<script>
+import BHeader from './components/BHeader.vue';
+import CountBookAPI from "./views/CountBookAPI.vue";
 
-</style>
+export default {
+  name: 'App',
+  components: {
+    BHeader,
+    CountBookAPI
+  },
+  computed: {
+    showHeader() {
+      return this.$route.name !== 'CountBookAPI';
+    }
+  }
+};
+</script>
